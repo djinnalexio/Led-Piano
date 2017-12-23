@@ -11,7 +11,7 @@ s5 = 23 #16
 s6 = 22 #15
 s7 = 27 #13
 s8 = 4 #7
-all_switches = [s1,s2,s3,s4,s5,s6,s7,s8]
+all_switches = [s5,s4,s1,s2,s3,s6,s7,s8]
 pin.setup(all_switches,pin.IN,pull_up_down=pin.PUD_UP)
 
 left=21 #40
