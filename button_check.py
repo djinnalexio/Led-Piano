@@ -20,7 +20,7 @@ s4 = 5 #29
 s5 = 23 #16
 s6 = 22 #15
 s7 = 27 #13
-s8 = 4 #7
+s8 = 17 #11
 pin.setup([s1,s2,s3,s4,s5,s6,s7,s8],pin.IN,pull_up_down=PUD)
 
 print ('\nPull %s resistor') % pull_up_down
