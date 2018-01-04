@@ -1,15 +1,20 @@
 #!/usr/bin/python
+#by Philippe Akue
 import RPi.GPIO as pin
 import time
 
-pull_up_down = raw_input('Pull UP or DOWN resistor\n>').lower()
+#This is a code to test if the press buttons works correctly.
+
+pull_up_down = raw_input('Pull UP or DOWN resistor\n>').lower()# choose to use a pull up or down resistor
 #activates a pull resitor to set a fix input voltage to an input pin
 if pull_up_down == 'down':#the second pin must output 3.3V
 	PUD = pin.PUD_DOWN	#pin reads low by default and high when the button is pressed
 	pressed = True
-elif pull_up_down == 'up':#the second pin must be output 0V(ground)
+elif pull_up_down == 'up':#the second pin must output 0V(ground)
 	PUD = pin.PUD_UP	#pin reads high by default and low when the button is pressed
 	pressed = False
+
+#Pull up resistor is recommended when using push buttons to avoid false readings.
 	
 pin.setmode(pin.BCM)
 
