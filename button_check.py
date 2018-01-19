@@ -1,40 +1,50 @@
 #!/usr/bin/python
-import RPi.GPIO as pin
+
+"By Andre Akue"
+
+import RPi.GPIO as GPIO
 import time
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(True)
 
-pull_up_down = raw_input('Pull UP or DOWN resistor\n>').lower()
+pull_up_down = raw_input("Choose between a pull 'UP' or 'DOWN' resistor\n>").lower()
 #activates a pull resitor to set a fix input voltage to an input pin
-if pull_up_down == 'down':#the second pin must output 3.3V
-	PUD = pin.PUD_DOWN	#pin reads low by default and high when the button is pressed
-	pressed = True
-elif pull_up_down == 'up':#the second pin must be output 0V(ground)
-	PUD = pin.PUD_UP	#pin reads high by default and low when the button is pressed
-	pressed = False
-	
-pin.setmode(pin.BCM)
-
-s1 = 20 #38
-s2 = 19 #35
-s3 = 6 #31
-s4 = 5 #29
-s5 = 23 #16
-s6 = 22 #15
-s7 = 27 #13
-s8 = 17 #11
-pin.setup([s1,s2,s3,s4,s5,s6,s7,s8],pin.IN,pull_up_down=PUD)
-
 print ('\nPull %s resistor') % pull_up_down
+if pull_up_down == 'down': #with a pull down resistor, the second pin must a 3.3V output
+	PUD = GPIO.PUD_DOWN	#pin reads low by default and high when the button is pressed
+	pressed = True
+elif pull_up_down == 'up': #with a pull up resistor, the second pin must be ground
+	PUD = GPIO.PUD_UP	#pin reads high by default and low when the button is pressed
+	pressed = False
+else:
+	print "not a resistor"
+	exit()
+class switches:
+	def __init__(self,name,pin):
+		self.name = name
+		self.pin = pin
+		GPIO.setup(self.pin, GPIO.IN, pull_up_down=PUD)
 
-def check():
-	while True:
-		for i in ['s1','s2','s3','s4','s5','s6','s7','s8']:
-			if pin.input(eval(i)) == pressed:#set the condition the button fufills
-				print '%s pressed %s' % (i,pin.input(eval(i)))
-			else:
-				print '%s not pressed %s' % (i,pin.input(eval(i)))
-			time.sleep(0.2)
+	def check(self):
+		if GPIO.input(self.pin) == pressed:#set the condition the button fufills
+			print "{0} is pressed, reading {1}".format(self.name,GPIO.input(self.pin))
+		else:
+			print "{0} is not pressed, reading {1}".format(self.name,GPIO.input(self.pin))
 
 try:
-	check()	
+	s1 = switches('Button 1', 20)
+	s2 = switches('Button 2', 19)
+	s3 = switches('Button 3', 6)
+	s4 = switches('Button 4', 5)
+	s5 = switches('Button 5', 23)
+	s6 = switches('Button 6', 22)
+	s7 = switches('Button 7', 27)
+	s8 = switches('Button 8', 17)
+
+	while 1:
+		for i in [s1,s2,s3,s4,s5,s6,s7,s8]:
+			i.check()
+			time.sleep(0.2)
+
 except KeyboardInterrupt:
-	pin.cleanup()
+	GPIO.cleanup()
