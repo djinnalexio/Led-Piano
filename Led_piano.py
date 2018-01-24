@@ -22,11 +22,11 @@ class keys:
 K1 = keys(20,21)
 K2 = keys(19,16)
 K3 = keys(6,12)
-K4 = keys(5,(21,13)) #key for both white lights
-K5 = keys(23,(21,16,12,25,24,13)) #key for all lights
+K4 = keys(5,(21,23)) #key for both white lights
+K5 = keys(13,(21,16,12,25,24,23)) #key for all lights
 K6 = keys(22,25)
 K7 = keys(27,24)
-K8 = keys(17,13)
+K8 = keys(17,23)
 
 try:
 	while True:

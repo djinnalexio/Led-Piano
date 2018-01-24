@@ -36,7 +36,7 @@ try:
 	s2 = switches('Button 2', 19)
 	s3 = switches('Button 3', 6)
 	s4 = switches('Button 4', 5)
-	s5 = switches('Button 5', 23)
+	s5 = switches('Button 5', 13)
 	s6 = switches('Button 6', 22)
 	s7 = switches('Button 7', 27)
 	s8 = switches('Button 8', 17)
